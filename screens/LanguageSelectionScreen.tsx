@@ -12,7 +12,7 @@ export default function LanguageSelectionScreen({ navigation }: any) {
    
     navigation.replace('Login');  
   }
-
+// select language screen
   return (
     <View className="flex-1 bg-white px-3">
       <View className="pt-12">
