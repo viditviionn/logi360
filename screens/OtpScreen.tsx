@@ -40,12 +40,20 @@ export default function OtpScreen({ navigation }: any) {
     };
 
     const handleVerify = () => {
-        setIsLoading(true);
+        console.log('Verify button pressed');
+        // setIsLoading(true);
         // Simulate verification process
-        setTimeout(() => {
-            setIsLoading(false);
-            // Add your verification logic here
-        }, 4000);
+        // setTimeout(() => {
+            
+        //     setIsLoading(false);
+        
+           
+        // }, 4000);
+        if (navigation) {
+            navigation.navigate('Home');
+        } else {
+            console.log('Navigation prop is undefined');
+        }
     };
 
     return (
@@ -59,7 +67,7 @@ export default function OtpScreen({ navigation }: any) {
                 <Text className="text-[20px] font-inter-semibold text-black">Enter OTP</Text>
             </View>
 
-            <Text className="text-[#505152] text-[16px] font-inter mb-6">
+            <Text className="text-[#333333] text-[16px] font-inter mb-6">
                 We have shared a 6 digit OTP with you.
             </Text>
 
@@ -68,7 +76,7 @@ export default function OtpScreen({ navigation }: any) {
                 {otp.map((digit, index) => (
                     <View
                         key={index}
-                        className={`w-[50px] h-[50px] border ${digit ? 'border-[#93E23E]' : 'border-[#E5E5E5]'} rounded-lg justify-center items-center bg-white`}
+                        className={`w-[50px] h-[50px] border ${digit ? 'border-[#1545C1]' : 'border-[#E5E5E5]'} rounded-lg justify-center items-center bg-white`}
                     >
                         <Text className="text-[24px] font-inter-medium text-[#262727]">
                             {digit}
@@ -85,8 +93,8 @@ export default function OtpScreen({ navigation }: any) {
                         Invalid OTP, please try again.
                 </Text>
             ):(
-                <Text className="text-[#505152] text-[14px] font-inter">
-                    Expect OTP in {timer} seconds
+                <Text className="text-[#666666] text-[14px] font-inter">
+                    Expect OTP in<Text className='text-[#404040] font-inter-bold'> {timer} seconds</Text>
                 </Text>
             )}
             <TouchableOpacity>

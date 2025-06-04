@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "my-expo-app",
-    "slug": "my-expo-app",
+    "name": "logi360",
+    "slug": "logi360",
     "version": "1.0.0",
     "web": {
       "favicon": "./assets/favicon.png"
@@ -10,7 +10,15 @@
       "tsconfigPaths": true
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "$(PRODUCT_NAME) needs access to your Camera.",
+          "enableMicrophonePermission": true,
+          "microphonePermissionText": "$(PRODUCT_NAME) needs access to your Microphone."
+        }
+      ]
     ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -35,9 +43,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "f8395cfb-3bec-4e6a-94de-e0bf9d6b63f4"
+        "projectId": "65bd1c6a-29fb-4232-a87c-e714d96a381f"
       }
     },
-    "owner": "nitesh09"
+    "owner": "viditviionn"
   }
 }
