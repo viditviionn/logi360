@@ -1,12 +1,21 @@
 import { NavigationContainer } from '@react-navigation/native';
 import RootNavigator from './navigation/RootNavigator';
-import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
-
-// import { LanguageProvider } from './context/LanguageContext';
+import {
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_600SemiBold,
+  Inter_700Bold,
+} from '@expo-google-fonts/inter';
+import {
+  Poppins_400Regular,
+  Poppins_600SemiBold,
+} from '@expo-google-fonts/poppins';
+import { useFonts } from 'expo-font';
 import './global.css';
 import { Platform, Text, View } from 'react-native';
 import LanguageSelectionScreen from 'screens/LanguageSelectionScreen';
 import { useEffect } from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function App() {
 
@@ -15,11 +24,16 @@ export default function App() {
     Inter_500Medium,
     Inter_600SemiBold,
     Inter_700Bold,
+    Poppins_400Regular,
+    Poppins_600SemiBold,
   });
+  
+   
+
 
   useEffect(() => {
     if (fontsLoaded) {
-      // SplashScreen.hideAsync();
+    
     }
   }, [fontsLoaded]);
 
@@ -37,16 +51,17 @@ export default function App() {
             </View>
           </View>
         ) : (
-          <View className="flex-1 bg-[#5b7d57] items-center justify-center">
-            <View className="flex-1 w-full max-w-[412px] bg-[#380b0b]">
-              <NavigationContainer>
-                <RootNavigator />
-              </NavigationContainer>
-            </View>
-          </View>
+          <SafeAreaProvider>
+        <NavigationContainer>
+          <RootNavigator />
+        </NavigationContainer>
+    </SafeAreaProvider>
         )
       }
     </>
 
+    // <View className="flex-1 bg-[#5b7d57] items-center justify-center">
+    //   <View className="flex-1 w-full max-w-[412px] bg-[#380b0b]">
+   
   );
 }
