@@ -3,8 +3,11 @@ import LanguageSelectionScreen from '../screens/LanguageSelectionScreen';
 import LoginScreen from '../screens/LoginScreen';
 import OtpScreen from '../screens/OtpScreen';
 import BottomTabNavigator from './BottomTabNavigator';
-import BookOrderScreen from 'screens/BookOrderScreen';
-import InvoiceScanner from 'screens/InvoiceScanner';
+import BookOrderScreen from '../screens/BookOrderScreen';
+import InvoiceScanner from '../screens/InvoiceScanner';
+import { Platform } from 'react-native';
+import HeaderTabNavigator from './HeaderTabNavigator';
+import HomeScreen from 'screens/HomeScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -17,10 +20,14 @@ export default function RootNavigator() {
       <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
       <Stack.Screen name="OTP" component={OtpScreen} options={{ headerShown: false }} />
       <Stack.Screen name="InvoiceScanner" component={InvoiceScanner} options={{ headerShown: false }} />
+      <Stack.Screen name="BookOrder" component={BookOrderScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
       
       {/* Main App Screens */}
-      <Stack.Screen name="Home" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="BookOrder" component={BookOrderScreen}  options={{ headerShown: false }} />
+       {Platform.OS !== 'web' ? (
+    <Stack.Screen name="Home" component={BottomTabNavigator} options={{ headerShown: false }} />
+  ) : (<Stack.Screen name="Home" component={HeaderTabNavigator} options={{ headerShown:false }} />)}
+  
     </Stack.Navigator>
-  );
+  )
 }
