@@ -44,19 +44,19 @@ export default function OtpScreen({ navigation }: any) {
 
         setIsLoading(true);
         console.log('Verify button pressed');
-        // setIsLoading(true);
-        // Simulate verification process
-        // setTimeout(() => {
-            
-        //     setIsLoading(false);
-        
-           
-        // }, 4000);
-        if (navigation) {
-            navigation.navigate('Home');
-        } else {
-            console.log('Navigation prop is undefined');
-        }
+        setIsLoading(true);
+        setTimeout(() => {
+
+            setIsLoading(false);
+
+            if (navigation) {
+                navigation.navigate('Home');
+            } else {
+                console.log('Navigation prop is undefined');
+            }
+        }, 4000);
+
+
     };
 
     return (
@@ -161,26 +161,26 @@ export default function OtpScreen({ navigation }: any) {
 
 
                     <View className='flex-row justify-between'>
-                        
-                        {isAllDigitsFilled ?(
+
+                        {isAllDigitsFilled ? (
                             <Text className="text-[#C30606] text-[14px] font-inter mb-2">
                                 Invalid OTP, please try again.
-                        </Text>
-                    ):(
-                        <Text className="text-[#666666] text-[14px] font-inter">
-                            Expect OTP in<Text className='text-[#404040] font-inter-bold'> {timer} seconds</Text>
-                        </Text>
-                    )}
-                    <TouchableOpacity>
-                    <Text className='text-[#007DD7] text-[14px] font-inter-medium'>Resend OTP</Text>
-                    </TouchableOpacity>
-                   
+                            </Text>
+                        ) : (
+                            <Text className="text-[#666666] text-[14px] font-inter">
+                                Expect OTP in<Text className='text-[#404040] font-inter-bold'> {timer} seconds</Text>
+                            </Text>
+                        )}
+                        <TouchableOpacity>
+                            <Text className='text-[#007DD7] text-[14px] font-inter-medium'>Resend OTP</Text>
+                        </TouchableOpacity>
+
                     </View>
 
-                    
+
                     {/* Loading Animation */}
                     {isLoading && (
-                        <View className="absolute inset-0 bg-black/50 items-center justify-center z-50">
+                        <View className="absolute inset-0 bg-black/50 items-center justify-center z-0">
                             <Image
                                 source={require('../assets/images/loader.gif')}
                                 className="w-[120px] h-[120px]"

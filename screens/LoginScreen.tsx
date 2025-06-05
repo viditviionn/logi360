@@ -68,7 +68,11 @@ export default function LoginScreen({ navigation }: any) {
                       keyboardType="numeric"
                       maxLength={10}
                       value={mobileNumber}
-                      onChangeText={setMobileNumber}
+                      onChangeText={(text) => {
+                        // Only allow numbers
+                        const numbersOnly = text.replace(/[^0-9]/g, '');
+                        setMobileNumber(numbersOnly);
+                      }}
                       placeholder="Enter mobile number"
                       placeholderTextColor="#A0A0A0"
                     />
@@ -118,7 +122,11 @@ export default function LoginScreen({ navigation }: any) {
                       keyboardType="numeric"
                       maxLength={10}
                       value={mobileNumber}
-                      onChangeText={setMobileNumber}
+                      onChangeText={(text) => {
+                        // Only allow numbers
+                        const numbersOnly = text.replace(/[^0-9]/g, '');
+                        setMobileNumber(numbersOnly);
+                      }}
                       placeholder="Enter mobile number"
                       placeholderTextColor="#A0A0A0"
                     />

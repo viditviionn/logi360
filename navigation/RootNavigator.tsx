@@ -5,6 +5,7 @@ import OtpScreen from '../screens/OtpScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 import BookOrderScreen from 'screens/BookOrderScreen';
 import InvoiceScanner from 'screens/InvoiceScanner';
+import NewOrderScreen from 'screens/NewOrderScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -21,6 +22,7 @@ export default function RootNavigator() {
       {/* Main App Screens */}
       <Stack.Screen name="Home" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="BookOrder" component={BookOrderScreen}  options={{ headerShown: false }} />
+      <Stack.Screen name="NewOrder" component={NewOrderScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }
