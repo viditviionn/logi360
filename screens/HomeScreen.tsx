@@ -61,27 +61,27 @@ export default function HomeScreen({ navigation, setActiveTab }: any) {
                   </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity
-                  className="bg-white rounded-2xl w-[20%] h-[200px]"
-                  onPress={() => setActiveTab('bookOrder')}
-                  style={{
-                    shadowColor: '#000',
-                    shadowOffset: { width: 0, height: 4 },
-                    shadowOpacity: 0.1,
-                    shadowRadius: 5,
-                    elevation: 5,
-                  }}
-                >
-                  <View className="flex-row justify-between mt-2 px-3">
-                    <Text className="text-[14px] font-semibold text-[#505152]">Load Truck</Text>
-                    <Ionicons name="chevron-forward" size={18} color="#1E1E1E" />
-                  </View>
-                  <View className="items-end mt-auto pr-3 pb-3 relative">
-                    <Image
-                      source={require('../assets/images/Van.png')}
-                      className="w-[70%] h-[55px]"
-                      resizeMode="contain"
-                    />
+            <TouchableOpacity
+              className="bg-white rounded-2xl w-[20%] h-[200px]"
+              // onPress={() => setActiveTab('bookOrder')}
+              style={{
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.1,
+                shadowRadius: 5,
+                elevation: 5,
+              }}
+            >
+              <View className="flex-row justify-between mt-2 px-3">
+                <Text className="text-[14px] font-semibold text-[#505152]">Load Truck</Text>
+                <Ionicons name="chevron-forward" size={18} color="#1E1E1E" />
+              </View>
+              <View className="items-end mt-auto pr-3 pb-3 relative">
+                <Image
+                  source={require('../assets/images/Van.png')}
+                  className="w-[70%] h-[55px]"
+                  resizeMode="contain"
+                />
 
                     <Image
                       source={require('../assets/images/Boxes.png')}
