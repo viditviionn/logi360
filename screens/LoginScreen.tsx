@@ -69,9 +69,8 @@ export default function LoginScreen({ navigation }: any) {
                       maxLength={10}
                       value={mobileNumber}
                       onChangeText={(text) => {
-                        // Only allow numbers
-                        const numbersOnly = text.replace(/[^0-9]/g, '');
-                        setMobileNumber(numbersOnly);
+                        const cleanedText = text.replace(/[^0-9]/g, '');
+                        setMobileNumber(cleanedText);
                       }}
                       placeholder="Enter mobile number"
                       placeholderTextColor="#A0A0A0"
@@ -150,9 +149,6 @@ export default function LoginScreen({ navigation }: any) {
           )
         }
 
-
-
-        {/* Login Form Section */}
 
       </View>
     </KeyboardAvoidingView>

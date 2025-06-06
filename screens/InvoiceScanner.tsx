@@ -11,19 +11,30 @@ const CORNER_SIZE = 40;
 
 export default function InvoiceScanner({ navigation }: any) {
   const device = useCameraDevice('back');
-  const { hasPermission } = useCameraPermission();
+  const { hasPermission, requestPermission } = useCameraPermission();
   const camera = useRef<Camera>(null);
   const [isCapturing, setIsCapturing] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Request camera permissions on mount
+  // Request both camera and gallery permissions on mount
   useEffect(() => {
     (async () => {
-      const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (!permission.granted) {
+      // Request Camera Permission
+      const cameraPermission = await requestPermission();
+      if (!cameraPermission) {
         Alert.alert(
-          "Permission Required",
+          "Camera Permission Required",
+          "Please grant permission to use your camera for scanning invoices",
+          [{ text: "OK" }]
+        );
+      }
+
+      // Request Gallery Permission
+      const galleryPermission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (!galleryPermission.granted) {
+        Alert.alert(
+          "Gallery Permission Required",
           "Please grant permission to access your gallery",
           [{ text: "OK" }]
         );
@@ -41,9 +52,9 @@ export default function InvoiceScanner({ navigation }: any) {
       });
 
       if (!result.canceled) {
-        // const selectedImage = result.assets[0];
-        // setSelectedImage(selectedImage.uri);
-        // setIsLoading(true);
+        const selectedAsset = result.assets[0];
+        setSelectedImage(selectedAsset.uri);
+        setIsLoading(true);
         setTimeout(() => {
           setIsLoading(false);
           navigation.navigate('NewOrder');

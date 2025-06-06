@@ -3,32 +3,20 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
+import Header from './Header';
 
 export default function BookOrderScreen({ navigation }: any) {
   return (
     <SafeAreaView className="flex-1 bg-[#f7fafd]">
       <StatusBar backgroundColor="white" />
       {/* Custom Header */}
-      <View
-        className="flex-row items-center bg-white px-4 py-6"
-        style={{
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 4 },
-          shadowOpacity: 0.08,
-          shadowRadius: 8,
-          elevation: 4,
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          className="pt-4 pr-3"
-        >
-          <Ionicons name="chevron-back" size={24} color="#000" />
-        </TouchableOpacity>
-        <Text className="pt-4 text-[18px] font-inter-semibold text-black">
-          Book new order
-        </Text>
-      </View>
+      <Header
+        title="Book New Order"
+        navigation={navigation}
+        bgColor="bg-[#FFFFFF]"
+        bottomBorder={true}
+      />
+ 
 
       {/* Main Content */}
       <View className="flex-1 justify-center items-center px-2">

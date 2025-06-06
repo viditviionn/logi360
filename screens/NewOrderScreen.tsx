@@ -8,15 +8,15 @@ import {
   Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { AntDesign, Feather, FontAwesome6, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 type RootStackParamList = {
-  NewOrder: { imagePath: string };
+
 };
 
-type Props = NativeStackScreenProps<RootStackParamList, 'NewOrder'>;
+type Props = NativeStackScreenProps<RootStackParamList>;
 
 export default function NewOrderScreen({ navigation,}: Props) {
   const [formData, setFormData] = useState({
@@ -51,13 +51,13 @@ export default function NewOrderScreen({ navigation,}: Props) {
     <SafeAreaView className="flex-1  bg-[#F5F5F5]">
       {/* Header */}
       <View
-        className="flex-row items-center justify-between bg-white px-4 pt-10"
+        className="flex-row items-center justify-between bg-white px-1 pt-10"
        
       >
         <View className="flex-row items-center">
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            className="pr-3"
+            className="pr-2"
           >
             <Ionicons name="chevron-back" size={24} color="#000" />
           </TouchableOpacity>
@@ -66,7 +66,7 @@ export default function NewOrderScreen({ navigation,}: Props) {
           </Text>
         </View>
         <TouchableOpacity>
-          <Text className="text-[16px] text-[#C30606] font-inter-medium">Cancel Order</Text>
+          <Text className="text-[16px] text-[#C30606] font-inter-medium pr-2">Cancel Order</Text>
         </TouchableOpacity>
 
 
@@ -75,10 +75,12 @@ export default function NewOrderScreen({ navigation,}: Props) {
 
       {/* Progress Indicators */}
      
-      <View className="flex-row justify-between items-center px-3 py-4 bg-white shadow-[0_4px_10px_rgba(0,0,3,0.1)]">
+      <View className="flex-row justify-between items-center px-4 py-4 bg-white shadow-[0_4px_10px_rgba(0,0,3,0.1)]">
         <View className="items-center ">
           <View className="  justify-center mb-1">
-            <Image source={require('../assets/icons/address.png')} className="w-8 h-8" />
+          <View className="w-10 h-10 rounded-full border border-black items-center justify-center">
+          <Feather name="map-pin" size={24} color="black" />
+          </View>
           </View>
           <Text className="font-inter-semibold text-[13px] text-[black]">Address</Text>
         </View>
@@ -87,7 +89,9 @@ export default function NewOrderScreen({ navigation,}: Props) {
         
         <View className="items-center ml-[-20px] mr-[-20px]">
           <View className="items-center justify-center mb-1">
-            <Image source={require('../assets/icons/items.png')} className="w-8 h-8" />
+          <View className="w-10 h-10 rounded-full border border-[#D1D5DB] items-center justify-center">
+            <Feather name="box" size={24} color="#D1D5DB" />
+            </View>
           </View>
           <Text className="font-inter-semibold text-[13px] text-[#A0A1A1] w-[90px] text-center whitespace-nowrap">Item details</Text>
         </View>
@@ -95,9 +99,11 @@ export default function NewOrderScreen({ navigation,}: Props) {
         <View className="flex-1 h-[1px] border-[1px] mb-6 border-dashed border-[#E0E0E0]" />
         
         <View className="items-center ">
-          <View className="items-center justify-center mb-1">
-            <Image source={require('../assets/icons/charges.png')} className="w-8 h-8" />
-          </View>
+        <View className="items-center justify-center mb-1">
+  <View className="w-10 h-10 rounded-full border border-[#D1D5DB] items-center justify-center">
+    <MaterialCommunityIcons name="currency-inr" size={24} color="#D1D5DB" />
+  </View>
+</View>
           <Text className="font-inter-semibold text-[13px] text-[#A0A1A1]">Charges</Text>
         </View>
       </View>
@@ -133,7 +139,7 @@ export default function NewOrderScreen({ navigation,}: Props) {
           <View className="absolute left-6 items-center" style={{ top: 20, bottom: 185 }}>
             <View className="w-[10px] h-[10px] mb-1 rounded-full bg-green-500" />
             <View className="flex-1 border-l border-dashed border-[#7C7C7C]" />
-            <View className="w-[10px] h-[10px] mt-1 rounded-full bg-red-500" />
+            <FontAwesome6 name="location-pin" size={15} color="red" />
           </View>
 
           {/* Consigner Details Card */}
@@ -240,14 +246,15 @@ export default function NewOrderScreen({ navigation,}: Props) {
             <Text className="text-[15px] font-inter">Upload additional documents</Text>
             <View className="flex-row items-center">
               <Text className="text-[#007AFF] text-[15px] font-medium mr-1">Upload</Text>
-            <Image source={require('../assets/icons/upload.png')} className="w-5 h-5" />
+              <MaterialIcons name="vertical-align-top" size={20} color="#007AFF" />
+
             </View>
           </TouchableOpacity>
         </View>
       </ScrollView>
 
       {/* Continue Button */}
-      <View className="px-4 mb-15 bg-white flex justify-center items-center">
+      <View className="px-4 py-2 mb-15 bg-white flex justify-center items-center">
   <TouchableOpacity className="bg-[#007AFF] py-3 mt-3 w-full max-w-[412px] rounded-lg items-center">
     <Text className="text-white text-[15px] font-inter-medium">Continue</Text>
   </TouchableOpacity>

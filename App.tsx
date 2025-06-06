@@ -14,8 +14,9 @@ import { useFonts } from 'expo-font';
 import './global.css';
 import { Platform, Text, View } from 'react-native';
 import LanguageSelectionScreen from 'screens/LanguageSelectionScreen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Camera } from 'react-native-vision-camera';
 
 export default function App() {
 
@@ -28,14 +29,23 @@ export default function App() {
     Poppins_600SemiBold,
   });
   
-   
+
+  
 
 
   useEffect(() => {
     if (fontsLoaded) {
-    
+      (async () => {
+        
+        const cameraPermission = await Camera.requestCameraPermission();
+        if (cameraPermission === 'denied') {
+          console.warn('Camera permission denied');
+        }
+      })();
     }
   }, [fontsLoaded]);
+
+  
 
   if (!fontsLoaded) return null;
 

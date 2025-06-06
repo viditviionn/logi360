@@ -54,7 +54,7 @@ export default function HomeScreen({ navigation }: any) {
   {/* Load Truck Card */}
   <TouchableOpacity
     className="bg-white rounded-2xl w-[47%] h-[120px]"
-    onPress={() => navigation.navigate('BookOrder')}
+    // onPress={() => navigation.navigate('BookOrder')}
     style={{
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 4 },
