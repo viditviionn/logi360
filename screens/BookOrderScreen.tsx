@@ -52,14 +52,14 @@ export default function BookOrderScreen({ navigation, setActiveTab }: any) {
   };
 
   const handleApply = () => {
-    console.log('Applying upload:', uploadedFile);
+    navigation.navigate('NewOrder');
   };
 
   return (
     <>
       {
         Platform.OS === 'web' ? (
-          <SafeAreaView className="flex gap-[10vh] h-[100%] bg-[#f7fafd] ">
+          <SafeAreaView className="flex gap-[10vh] h-[100%] bg-[#f7fafd]">
             <View
               className="flex-row items-center bg-white px-4 py-6 "
               style={{
