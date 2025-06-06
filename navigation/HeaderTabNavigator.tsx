@@ -28,7 +28,7 @@ export default function WebHeaderNavigator() {
       case 'bookOrder':
         return <BookOrderScreen setActiveTab={setActiveTab} />;
       default:
-        return;
+        return <HomeScreen  setActiveTab={setActiveTab}/>;
     }
   };
 
@@ -61,12 +61,12 @@ export default function WebHeaderNavigator() {
               style={{
                 width: 24,
                 height: 24,
-                tintColor: activeTab === 'home'||'bookorder' ? '#BBFB6A' : '#666666',
+                tintColor: activeTab === 'home' || activeTab === 'bookOrder' ? '#BBFB6A' : '#666666',
                 marginBottom: 4,
               }}
             />
             <Text style={{
-              color: activeTab === 'home' || 'bookorder' ? '#BBFB6A' : '#666666',
+              color: activeTab === 'home' || activeTab === 'bookOrder' ? '#BBFB6A' : '#666666',
               fontSize: 14,
               fontWeight: '500',
             }}>

@@ -19,8 +19,8 @@ export default function LanguageSelectionScreen({ navigation }: any) {
       {Platform.OS === 'web' ? (
         <View className="flex-1 w-full max-w-[700px] shadow-lg rounded-xl ml-[25%] mr-[25%] m-10">
           <View className="pt-12 w-full px-4">
-            <View className="flex-row items-center mb-6">
-              <Text className="ml-2 text-[20px] ml-[18%] font-inter-semibold text-black">
+            <View className="flex-row justify-center items-center mb-6">
+              <Text className=" text-[20px] font-inter-semibold text-black">
                 Select a language
               </Text>
             </View>

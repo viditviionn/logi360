@@ -8,19 +8,20 @@ export default function OtpScreen({ navigation }: any) {
     const [otp, setOtp] = useState(['', '', '', '', '', '']);
     const [timer, setTimer] = useState(30);
     const [isLoading, setIsLoading] = useState(false);
-    const [activeIndex, setActiveIndex] = useState(-1);
- 
+    const [activeIndex, setActiveIndex] = useState<number | null>(-1);
+    // const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
+
     const isAllDigitsFilled = otp.join('').includes('888');
     const inputRefs = Array(6).fill(null).map(() => useRef<TextInput>(null));
- 
+
     useEffect(() => {
         const interval = setInterval(() => {
             setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
         }, 1000);
- 
+
         return () => clearInterval(interval);
     }, []);
- 
+
     const handleNumberPress = (num: string) => {
         if (isLoading) return; // Prevent input while loading
         const currentIndex = otp.findIndex(digit => digit === '');
@@ -35,7 +36,7 @@ export default function OtpScreen({ navigation }: any) {
             }
         }
     };
- 
+
     const handleBackspace = () => {
         if (isLoading) return; // Prevent input while loading
         const lastFilledIndex = otp.map(digit => digit !== '').lastIndexOf(true);
@@ -46,24 +47,24 @@ export default function OtpScreen({ navigation }: any) {
             setActiveIndex(lastFilledIndex);
         }
     };
- 
+
     const handleVerify = () => {
- 
+
         setIsLoading(true);
         console.log('Verify button pressed');
         setIsLoading(true);
         setTimeout(() => {
- 
+
             setIsLoading(false);
- 
+
             if (navigation) {
                 navigation.navigate('Home');
             } else {
                 console.log('Navigation prop is undefined');
             }
         }, 4000);
- 
- 
+
+
     };
 
     return (
@@ -84,27 +85,35 @@ export default function OtpScreen({ navigation }: any) {
                     <View className="flex-row justify-between mb-4 w-[50%]">
                         {otp.map((digit, index) => (
                             <TextInput
-                                key={index}
-                                ref={inputRefs[index]}
-                                className={`w-[50px] h-[50px] text-center border ${digit ? 'border-[#93E23E]' : 'border-[#E5E5E5]'} rounded-lg bg-white text-[24px] font-inter-medium text-[#262727]`}
-                                value={digit}
-                                maxLength={1}
-                                keyboardType="numeric"
-                                onChangeText={(text) => {
-                                    const newOtp = [...otp];
-                                    newOtp[index] = text;
-                                    setOtp(newOtp);
-
-                                    if (text && index < inputRefs.length - 1) {
-                                        inputRefs[index + 1]?.current?.focus();
-                                    }
-                                }}
-                                onKeyPress={({ nativeEvent }) => {
-                                    if (nativeEvent.key === 'Backspace' && !otp[index] && index > 0) {
-                                        inputRefs[index - 1]?.current?.focus();
-                                    }
-                                }}
-                            />
+                            key={index}
+                            ref={inputRefs[index]}
+                            className={`w-[50px] h-[50px] text-center rounded-lg bg-white text-[24px] font-inter-medium text-[#262727]`}
+                            style={{
+                              borderWidth: 1,
+                              borderStyle: 'solid', // Important for Web
+                              borderColor: activeIndex === index ? '#007AFF' : '#E5E5E5',
+                            }}
+                            value={digit}
+                            maxLength={1}
+                            keyboardType="numeric"
+                            onFocus={() => setActiveIndex(index)}
+                            onBlur={() => setActiveIndex(null)}
+                            onChangeText={(text) => {
+                              const newOtp = [...otp];
+                              newOtp[index] = text;
+                              setOtp(newOtp);
+                          
+                              if (text && index < inputRefs.length - 1) {
+                                inputRefs[index + 1]?.current?.focus();
+                              }
+                            }}
+                            onKeyPress={({ nativeEvent }) => {
+                              if (nativeEvent.key === 'Backspace' && !otp[index] && index > 0) {
+                                inputRefs[index - 1]?.current?.focus();
+                              }
+                            }}
+                          />
+                          
                         ))}
                     </View>
 
@@ -145,7 +154,7 @@ export default function OtpScreen({ navigation }: any) {
             </View>
         ) : (
             <View className="flex-1 bg-[#F5F5F5]  rounded-xl shadow-lg">
-                
+
                 <View className="flex-row items-center pt-4 mt-10 mb-8 ml-[-6px] px-4 ">
                     <TouchableOpacity onPress={() => navigation.goBack()} className="mr-2" disabled={isLoading}>
                         <Ionicons name="chevron-back" size={24} color="#000" />
