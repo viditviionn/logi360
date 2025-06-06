@@ -1,7 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
-import OrdersScreen from '../screens/OrdersScreen';
-import ProfileScreen from '../screens/ProfileScreen';
 import { Image } from 'react-native';
 
 const Tab = createBottomTabNavigator();
@@ -42,7 +40,7 @@ export default function BottomTabNavigator() {
       />
       <Tab.Screen
         name="OrdersTab"
-        component={OrdersScreen}
+        component={HomeScreen}
         options={{
           tabBarLabel: 'Orders',
           tabBarIcon: ({ focused }) => (
@@ -60,7 +58,7 @@ export default function BottomTabNavigator() {
       />
       <Tab.Screen
         name="ProfileTab"
-        component={ProfileScreen}
+        component={HomeScreen}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ focused }) => (

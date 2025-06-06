@@ -12,12 +12,14 @@ import {
 } from '@expo-google-fonts/poppins';
 import { useFonts } from 'expo-font';
 import './global.css';
-import { Platform, Text, View } from 'react-native';
-import { useEffect } from 'react';
+import { Platform, Text, View, useColorScheme } from 'react-native';
+import LanguageSelectionScreen from 'screens/LanguageSelectionScreen';
+import { useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Camera } from 'react-native-vision-camera';
 
 export default function App() {
-
+  const colorScheme = useColorScheme();
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
     Inter_500Medium,
@@ -27,17 +29,41 @@ export default function App() {
     Poppins_600SemiBold,
   });
   
-   
 
+  
+
+
+  // useEffect(() => {
+  //   if (fontsLoaded) {
+  //     // Force navigation to Language screen on web
+   
+  //       window.history.replaceState({}, '', '/Language');
+  //     } 
+  //     else{
+  //       async () => {
+        
+  //         const cameraPermission = await Camera.requestCameraPermission();
+  //         if (cameraPermission === 'denied') {
+  //           console.warn('Camera permission denied');
+  //         }
+  //       }
+  //     }
+     
+    
+  // }, [fontsLoaded]);
 
   useEffect(() => {
-    if (fontsLoaded) {
-      // Force navigation to Language screen on web
-      if (Platform.OS === 'web') {
-        window.history.replaceState({}, '', '/Language');
+    if (Platform.OS === 'web') {
+      // Set dark mode class based on system preference
+      if (colorScheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
       }
     }
-  }, [fontsLoaded]);
+  }, [colorScheme]);
+
+  
 
   if (!fontsLoaded) return null;
   const linking = {

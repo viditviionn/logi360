@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
+import Header from './Header';
 
-export default function BookOrderScreen({ navigation , setActiveTab }: any) {
+export default function BookOrderScreen({ navigation, setActiveTab }: any) {
   const [dragOver, setDragOver] = useState(false);
   const [uploadedFile, setUploadedFile] = useState<any>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -144,14 +145,14 @@ export default function BookOrderScreen({ navigation , setActiveTab }: any) {
             <View className="flex-row justify-center w-full px-4 pb-6 gap-x-4">
               {!previewUrl ? (
                 <TouchableOpacity
-                onPress={handleManualUploadClick}
-                className="flex-1 border border-[#93E23E] rounded-lg py-3 items-center bg-white max-w-[300px]"
-              >
-                <Text className="text-[#262727] font-inter-medium">
-                  Enter Manually
-                </Text>
-              </TouchableOpacity>
-              
+                  onPress={handleManualUploadClick}
+                  className="flex-1 border border-[#93E23E] rounded-lg py-3 items-center bg-white max-w-[300px]"
+                >
+                  <Text className="text-[#262727] font-inter-medium">
+                    Enter Manually
+                  </Text>
+                </TouchableOpacity>
+
               ) : (
                 <>
                   <TouchableOpacity
@@ -174,26 +175,12 @@ export default function BookOrderScreen({ navigation , setActiveTab }: any) {
         ) : (
           <SafeAreaView className="flex-1 bg-[#f7fafd]">
             <StatusBar backgroundColor="white" />
-            <View
-              className="flex-row items-center bg-white px-4 py-6"
-              style={{
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 4 },
-                shadowOpacity: 0.08,
-                shadowRadius: 8,
-                elevation: 4,
-              }}
-            >
-              <TouchableOpacity
-                onPress={() => navigation.goBack()}
-                className="pt-4 pr-3"
-              >
-                <Ionicons name="chevron-back" size={24} color="#000" />
-              </TouchableOpacity>
-              <Text className="pt-4 text-[18px] font-inter-semibold text-black">
-                Book new order
-              </Text>
-            </View>
+            <Header
+              title="Book New Order"
+              navigation={navigation}
+              bgColor="bg-[#FFFFFF]"
+              bottomBorder={true}
+            />
 
             <View className="flex-1 justify-center items-center px-2">
               <Image
@@ -215,7 +202,11 @@ export default function BookOrderScreen({ navigation , setActiveTab }: any) {
                 </Text>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => navigation.navigate('InvoiceScanner')} className="flex-1 bg-[#93E23E] rounded-lg py-3 items-center">
+              <TouchableOpacity onPress={() => {
+                if (Platform.OS !== 'web') {
+                  navigation.navigate('InvoiceScanner');
+                }
+              }} className="flex-1 bg-[#93E23E] rounded-lg py-3 items-center">
                 <Text className="text-[#262727]  font-inter-medium">
                   Take picture
                 </Text>
