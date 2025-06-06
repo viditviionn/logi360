@@ -36,7 +36,7 @@ export default function HomeScreen({ navigation , setActiveTab}: any) {
 
             <TouchableOpacity
               className="bg-white rounded-2xl w-[20%] h-[200px]"
-              onPress={() => setActiveTab('bookOrder')}
+              // onPress={() => setActiveTab('bookOrder')}
               style={{
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 4 },
