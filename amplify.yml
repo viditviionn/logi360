@@ -1,0 +1,39 @@
+version: 1
+
+frontend:
+
+  phases:
+
+    preBuild:
+
+      commands:
+
+        - nvm install 18
+
+        - nvm use 18
+
+        - corepack enable
+
+        - yarn install  # or `npm ci` if using npm
+
+    build:
+
+      commands:
+
+        - yarn expo export:web  # For Expo SDK 49+; use `expo build:web` for older versions
+
+  artifacts:
+
+    baseDirectory: dist  # or `web-build` for older expo-cli builds
+
+    files:
+
+      - '**/*'
+
+  cache:
+
+    paths:
+
+      - node_modules/**/*
+
+ 
