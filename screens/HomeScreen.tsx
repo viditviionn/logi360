@@ -32,10 +32,10 @@ export default function HomeScreen({ navigation }: any) {
 
 
   return (
-      <>
-        {
-          Platform.OS === 'web' ? (
-            <>
+    <>
+      {
+        Platform.OS === 'web' ? (
+          <>
             <SafeAreaView className="flex-1 gap-6">
           <StatusBar backgroundColor="#2F2F2F" />
           <WebHeaderNavigator navigation={navigation}/>
