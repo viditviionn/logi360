@@ -1,11 +1,12 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import Header from './Header';
+import WebHeaderNavigator from '../navigation/HeaderTabNavigator';
 
-export default function BookOrderScreen({ navigation, setActiveTab }: any) {
+export default function BookOrderScreen({ navigation }: any) {
   const [dragOver, setDragOver] = useState(false);
   const [uploadedFile, setUploadedFile] = useState<any>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -59,7 +60,9 @@ export default function BookOrderScreen({ navigation, setActiveTab }: any) {
     <>
       {
         Platform.OS === 'web' ? (
-          <SafeAreaView className="flex gap-[10vh] h-[100%] bg-[#f7fafd]">
+          <SafeAreaView className="flex h-[100%] bg-[#f7fafd]">
+            <WebHeaderNavigator navigation={navigation} />
+            <View className="flex gap-[10vh] h-[100%] bg-[#f7fafd]">
             <View
               className="flex-row items-center bg-white px-4 py-6 "
               style={{
@@ -71,7 +74,7 @@ export default function BookOrderScreen({ navigation, setActiveTab }: any) {
               }}
             >
               <TouchableOpacity
-                onPress={() => setActiveTab('home')}
+                onPress={() => navigation.navigate('HomeScreen')}
                 className="pt-4 pr-3"
               >
                 <Ionicons name="chevron-back" size={24} color="#000" />
@@ -170,6 +173,7 @@ export default function BookOrderScreen({ navigation, setActiveTab }: any) {
                   </TouchableOpacity>
                 </>
               )}
+            </View>
             </View>
           </SafeAreaView>
         ) : (
