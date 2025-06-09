@@ -1,9 +1,7 @@
-import React from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity, Image, StatusBar, Platform ,FlatList} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, SafeAreaView, TouchableOpacity, Image, StatusBar, Platform, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import WebHeaderNavigator from '../navigation/HeaderTabNavigator';
-import { useState } from 'react';
-
 
 const locations = [
   {
@@ -24,12 +22,9 @@ const locations = [
   },
 ];
 
-
 export default function HomeScreen({ navigation }: any) {
   const [selectedLocation, setSelectedLocation] = useState(locations[0]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-
 
   return (
     <>

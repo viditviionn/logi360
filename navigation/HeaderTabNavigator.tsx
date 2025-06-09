@@ -45,7 +45,7 @@ export default function WebHeaderNavigator({ navigation }: any) {
   }
 
   const renderDropdownItem = (market: string) => (
-    <View className='bg-red-500'>
+    <View>
       {marketLocations[market]
         .filter(location => !(market === selectedMarket && location === selectedLocation))
         .map((location, index) => (
@@ -112,7 +112,7 @@ export default function WebHeaderNavigator({ navigation }: any) {
               position: 'absolute',
               top: 70,
               left: 12,
-              backgroundColor: '#1F1F1F',
+              backgroundColor: 'black',
               borderRadius: 8,
               width: 300,
               maxHeight: 400,

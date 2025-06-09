@@ -84,6 +84,7 @@ export default function App() {
         InvoiceScanner: 'InvoiceScanner',
         BookOrder: 'BookOrder',
         HomeScreen: 'HomeScreen',
+        NewOrder: 'NewOrder',
       },
     },
   };
@@ -93,7 +94,7 @@ export default function App() {
       {
         Platform.OS === 'web' ? (
           <View className="flex-1 bg-white items-center justify-center ">
-          <View className="flex-1 w-full bg-white" >
+          <View className="flex-1 w-full bg-white " >
               <NavigationContainer linking={linking}>
                 <RootNavigator />
               </NavigationContainer>
