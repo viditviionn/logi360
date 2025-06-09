@@ -24,8 +24,7 @@ type RootStackParamList = {
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
-export default function NewOrderScreen({ navigation, }: Props) {
-
+export default function NewOrderScreen({ navigation }: Props) {
   const [open, setOpen] = useState(false);
   const [deliveryType, setDeliveryType] = useState('godown');
   const [showCancelModal, setShowCancelModal] = useState(false);
@@ -33,16 +32,13 @@ export default function NewOrderScreen({ navigation, }: Props) {
     { label: 'Godown', value: 'godown' },
     { label: 'Home', value: 'home' },
     { label: 'Office', value: 'office' },
-
   ]);
   const [uploadedDocs, setUploadedDocs] = useState<string[]>([]);
+
   const pickDocument = async () => {
     try {
       const result = await DocumentPicker.getDocumentAsync({ type: "*/*" });
-
-
       if (!result.canceled) {
-
         const fileName = result.assets?.[0]?.name;
         if (fileName) {
           setUploadedDocs(prev => [...prev, fileName]);
@@ -54,8 +50,8 @@ export default function NewOrderScreen({ navigation, }: Props) {
   };
 
   const handleContinue = () => {
-    navigation.navigate("OrderDetails")
-  }
+    navigation.navigate("OrderDetails");
+  };
 
   return Platform.OS === 'web' ? (
     <SafeAreaView className="flex-1 bg-[#F5F5F5]">
@@ -536,16 +532,13 @@ export default function NewOrderScreen({ navigation, }: Props) {
 
       {/* Continue Button */}
       <View className="px-4 py-2 mb-15 bg-white flex justify-center items-center">
-  <TouchableOpacity onPress={handleContinue} className="bg-[#007AFF] py-3 mt-3 w-full max-w-[412px] rounded-lg items-center">
-    <Text className="text-white text-[15px] font-inter-medium">Continue</Text>
-  </TouchableOpacity>
-</View>
+        <TouchableOpacity className="bg-[#007AFF] py-3 mt-3 w-full max-w-[412px] rounded-lg items-center">
+          <Text className="text-white text-[15px] font-inter-medium">Continue</Text>
+        </TouchableOpacity>
+      </View>
 
-
-
-
-{/* Cancel Modal */}
-{showCancelModal && (
+      {/* Cancel Modal */}
+      {showCancelModal && (
         <View className="absolute inset-0 bg-black/80  justify-center items-center z-50">
           <View className="w-[85%] bg-white rounded-2xl p-6 shadow-lg">
             <Text className="text-[16px] text-[#505152] font-inter text-center self-center mb-6 w-40">

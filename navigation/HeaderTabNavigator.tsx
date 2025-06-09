@@ -6,7 +6,7 @@ type MarketLocations = {
   [key: string]: string[];
 };
 
-export default function WebHeaderNavigator({ navigation }: any) {
+export default function WebHeaderNavigator({ navigation }: any): JSX.Element {
   const [activeTab, setActiveTab] = useState("home");
   const [showMarketDropdown, setShowMarketDropdown] = useState(false);
   const [selectedMarket, setSelectedMarket] = useState("APMC Market");
@@ -45,7 +45,7 @@ export default function WebHeaderNavigator({ navigation }: any) {
   }
 
   const renderDropdownItem = (market: string) => (
-    <View>
+    <View className='bg-red-500'>
       {marketLocations[market]
         .filter(location => !(market === selectedMarket && location === selectedLocation))
         .map((location, index) => (
@@ -112,7 +112,7 @@ export default function WebHeaderNavigator({ navigation }: any) {
               position: 'absolute',
               top: 70,
               left: 12,
-              backgroundColor: 'black',
+              backgroundColor: '#1F1F1F',
               borderRadius: 8,
               width: 300,
               maxHeight: 400,

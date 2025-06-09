@@ -9,8 +9,8 @@ import { Platform } from 'react-native';
 import HeaderTabNavigator from './HeaderTabNavigator';
 import HomeScreen from '../screens/HomeScreen';
 import NewOrderScreen from '../screens/NewOrderScreen';
-import OrderDetailsScreen from 'screens/OrderDetailsScreen';
-import ManualyNewOrderScreen from 'screens/ManualyNewOrderScreen';
+import OrderDetailsScreen from '../screens/OrderDetailsScreen';
+import ManualyNewOrderScreen from '../screens/ManualyNewOrderScreen';
 
 let InvoiceScanner: any;
 if (Platform.OS !== 'web') {
