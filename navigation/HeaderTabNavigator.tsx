@@ -1,39 +1,76 @@
-import { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, Platform } from 'react-native';
-import HomeScreen from '../screens/HomeScreen';
-import OrdersScreen from '../screens/OrdersScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Image, Modal, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import BookOrderScreen from 'screens/BookOrderScreen';
 
-export default function WebHeaderNavigator() {
-  const [activeTab, setActiveTab] = useState('home');
+type MarketLocations = {
+  [key: string]: string[];
+};
 
-  if (Platform.OS !== 'web') {
-    return (
-      <View>
-        <Text>This layout is for web only.</Text>
-      </View>
-    );
-  }
+export default function WebHeaderNavigator({ navigation }: any) {
+  const [activeTab, setActiveTab] = useState("home");
+  const [showMarketDropdown, setShowMarketDropdown] = useState(false);
+  const [selectedMarket, setSelectedMarket] = useState("APMC Market");
+  const [selectedLocation, setSelectedLocation] = useState("Administrative building, Sec 18, Vashi Navi M...");
 
-  const renderContent = () => {
-    switch (activeTab) {
-      case 'home':
-        return <HomeScreen  setActiveTab={setActiveTab}/>;
-      case 'orders':
-        return <OrdersScreen />;
-      case 'profile':
-        return <ProfileScreen />;
-      case 'bookOrder':
-        return <BookOrderScreen setActiveTab={setActiveTab} />;
-      default:
-        return <HomeScreen  setActiveTab={setActiveTab}/>;
-    }
+  const marketLocations: MarketLocations = {
+    "APMC Market": [
+      "Administrative building, Sec 18, Vashi Navi M...",
+    ],
+    "Vashi Market": [
+      "Vashi Main Office, Sec 17",
+    ],
+    "Turbhe Market": [
+      "Turbhe Main Office",
+    ],
+    "Koparkhairne Market": [
+      "Koparkhairne Main Office",
+    ]
   };
 
+  const markets = Object.keys(marketLocations).filter(market => market !== selectedMarket);
+
+  const handleMarketSelect = (market: string, location: string) => {
+    setSelectedMarket(market);
+    setSelectedLocation(location);
+    setShowMarketDropdown(false);
+  };
+
+  const handleOrders = () => {
+    navigation.navigate('HomeScreen');
+    setActiveTab('orders');
+  }
+  const handleProfile = () => {
+    navigation.navigate('HomeScreen');
+    setActiveTab('profile');
+  }
+
+  const renderDropdownItem = (market: string) => (
+    <View className='bg-red-500'>
+      {marketLocations[market]
+        .filter(location => !(market === selectedMarket && location === selectedLocation))
+        .map((location, index) => (
+        <TouchableOpacity
+          key={`${market}-${index}`}
+          style={{
+            padding: 15,
+            borderBottomWidth: 1,
+            borderBottomColor: '#2F2F2F',
+          }}
+          onPress={() => handleMarketSelect(market, location)}
+        >
+          <Text style={{ color: 'white', fontSize: 16, fontWeight: '500' }}>
+            {market}
+          </Text>
+          <Text style={{ color: '#BEC4C8', fontSize: 12, marginTop: 4 }}>
+            {location}
+          </Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
+
   return (
-    <View >
+    <View>
       <View style={{
         flexDirection: 'row',
         alignItems: 'center',
@@ -43,30 +80,73 @@ export default function WebHeaderNavigator() {
         justifyContent: 'space-between',
       }}>
         <View>
-          <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <TouchableOpacity 
+            style={{ flexDirection: 'row', alignItems: 'center' }}
+            onPress={() => setShowMarketDropdown(!showMarketDropdown)}
+          >
             <Text style={{ color: 'white', fontSize: 18, fontWeight: '600', marginRight: 6 }}>
-              APMC Market
+              {selectedMarket}
             </Text>
             <Ionicons name="chevron-down" size={18} color="white" />
           </TouchableOpacity>
-          <Text style={{ color: '#BEC4C8', fontSize: 12 }}>
-            Administrative building, Sec 18, Vashi Navi M...
-          </Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={{ color: '#BEC4C8', fontSize: 12 }}>
+              {selectedLocation}
+            </Text>
+          </View>
         </View>
 
+        {/* Market Dropdown Modal */}
+        <Modal
+          visible={showMarketDropdown}
+          transparent={true}
+          animationType="fade"
+          onRequestClose={() => setShowMarketDropdown(false)}
+        >
+          <TouchableOpacity
+            style={{ flex: 1, backgroundColor: 'transparent' }}
+            activeOpacity={1}
+            onPress={() => setShowMarketDropdown(false)}
+          >
+            <View style={{ 
+              position: 'absolute',
+              top: 70,
+              left: 12,
+              backgroundColor: '#1F1F1F',
+              borderRadius: 8,
+              width: 300,
+              maxHeight: 400,
+              elevation: 5,
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowRadius: 3.84,
+            }}>
+              <FlatList
+                data={markets}
+                renderItem={({ item }) => renderDropdownItem(item)}
+                keyExtractor={(item) => item}
+                showsVerticalScrollIndicator={false}
+              />
+            </View>
+          </TouchableOpacity>
+        </Modal>
+
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 32 }}>
-          <TouchableOpacity onPress={() => setActiveTab('home')} style={{ alignItems: 'center',display:'flex',flexDirection:'row',justifyContent:'center', gap: 7 }}>
+          <TouchableOpacity onPress={() => {
+            setActiveTab('home');
+            navigation.navigate('HomeScreen');
+          }} style={{ alignItems: 'center',display:'flex',flexDirection:'row',justifyContent:'center', gap: 7 }}>
             <Image
               source={require('../assets/icons/home.png')}
               style={{
                 width: 24,
                 height: 24,
-                tintColor: activeTab === 'home' || activeTab === 'bookOrder' ? '#BBFB6A' : '#666666',
+                tintColor: activeTab === 'home' ? '#BBFB6A' : '#666666',
                 marginBottom: 4,
               }}
             />
             <Text style={{
-              color: activeTab === 'home' || activeTab === 'bookOrder' ? '#BBFB6A' : '#666666',
+              color: activeTab === 'home' ? '#BBFB6A' : '#666666',
               fontSize: 14,
               fontWeight: '500',
             }}>
@@ -74,7 +154,7 @@ export default function WebHeaderNavigator() {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => setActiveTab('orders')} style={{ alignItems: 'center',display:'flex',flexDirection:'row',justifyContent:'center', gap: 7 }}>
+          <TouchableOpacity onPress={() => { handleOrders()}} style={{ alignItems: 'center',display:'flex',flexDirection:'row',justifyContent:'center', gap: 7 }}>
             <Image
               source={require('../assets/icons/box.png')}
               style={{
@@ -93,7 +173,7 @@ export default function WebHeaderNavigator() {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => setActiveTab('profile')} style={{ alignItems: 'center' ,display:'flex',flexDirection:'row',justifyContent:'center', gap: 7 }}>
+          <TouchableOpacity onPress={handleProfile} style={{ alignItems: 'center' ,display:'flex',flexDirection:'row',justifyContent:'center', gap: 7 }}>
             <Image
               source={require('../assets/icons/user-round.png')}
               style={{
@@ -112,10 +192,6 @@ export default function WebHeaderNavigator() {
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
-
-      <View style={{ flex: 1 }}>
-        {renderContent()}
       </View>
     </View>
   );

@@ -1,6 +1,8 @@
+import React from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity, Image, StatusBar, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-export default function HomeScreen({ navigation , setActiveTab}: any) {
+import WebHeaderNavigator from '../navigation/HeaderTabNavigator';
+export default function HomeScreen({ navigation }: any) {
   return (
       <>
         {
@@ -8,11 +10,14 @@ export default function HomeScreen({ navigation , setActiveTab}: any) {
             <>
             <SafeAreaView className="flex-1 gap-6">
           <StatusBar backgroundColor="#2F2F2F" />
-          <View className="flex-1 flex-row gap-6 px-4 mt-6">
+          <WebHeaderNavigator navigation={navigation}/>
+          <View className="flex-1 flex-row gap-6 px-4 mt-1">
 
             <TouchableOpacity
               className="bg-white rounded-2xl w-[20%] h-[200px]"
-              onPress={() => setActiveTab('bookOrder')}
+              onPress={() => {
+                navigation.navigate('BookOrder');
+              }}
               style={{
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 6 },
