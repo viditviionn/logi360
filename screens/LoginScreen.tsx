@@ -32,7 +32,7 @@ export default function LoginScreen({ navigation }: any) {
   return Platform.OS === 'web' ? (
     <>
       <StatusBar backgroundColor="#1C1C1E" style="light" />
-      <View className="flex-1 bg-[#F5F5F5] max-w-[700px] shadow-lg rounded-xl ml-[25%] mr-[25%] m-10">
+      <View className="flex-1 bg-[#F5F5F5] max-w-[700px] shadow-lg rounded-xl self-center m-10 w-full">
         <View className="bg-[#1C1C1E] h-[150px] w-full rounded-b-[42px] items-center justify-center">
           <Image
             source={require('../assets/images/logi360.png')}

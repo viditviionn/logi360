@@ -74,7 +74,7 @@ export default function OtpScreen({ navigation }: any) {
 
 
     return Platform.OS === 'web' ? (
-        <View className="flex-1 bg-[#F5F5F5] px-4 max-w-[700px] shadow-lg rounded-xl ml-[25%] mr-[25%] m-10">
+        <View className="flex-1 bg-[#F5F5F5] px-4 max-w-[700px] shadow-lg rounded-xl self-center m-10 w-full">
             <StatusBar backgroundColor="#F5F5F5" style="light" />
             <View className="flex-row items-center pt-4 mt-10 mb-8 ml-[-6px]">
                 <TouchableOpacity onPress={() => navigation.goBack()} className="mr-2" disabled={isLoading}>
