@@ -6,8 +6,8 @@ import BottomTabNavigator from './BottomTabNavigator';
 import BookOrderScreen from '../screens/BookOrderScreen';
 import { Platform } from 'react-native';
 import HeaderTabNavigator from './HeaderTabNavigator';
-import HomeScreen from 'screens/HomeScreen';
-import NewOrderScreen from 'screens/NewOrderScreen';
+import HomeScreen from '../screens/HomeScreen';
+import NewOrderScreen from '../screens/NewOrderScreen';
 
 let InvoiceScanner: any;
 if (Platform.OS !== 'web') {

@@ -4,7 +4,7 @@ import HomeScreen from '../screens/HomeScreen';
 import OrdersScreen from '../screens/OrdersScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import { Ionicons } from '@expo/vector-icons';
-import BookOrderScreen from 'screens/BookOrderScreen';
+import BookOrderScreen from '../screens/BookOrderScreen';
 
 export default function WebHeaderNavigator() {
   const [activeTab, setActiveTab] = useState('home');

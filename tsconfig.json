@@ -6,7 +6,9 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"]
+      "@screens/*": ["screens/*"],
+      "@navigation/*": ["navigation/*"],
+      "@components/*": ["components/*"]
     }
   }
 }
