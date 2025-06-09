@@ -8,6 +8,7 @@ import { Platform } from 'react-native';
 import HeaderTabNavigator from './HeaderTabNavigator';
 import HomeScreen from 'screens/HomeScreen';
 import NewOrderScreen from 'screens/NewOrderScreen';
+import OrderDetailsScreen from 'screens/OrderDetailsScreen';
 
 let InvoiceScanner: any;
 if (Platform.OS !== 'web') {
@@ -26,6 +27,7 @@ export default function RootNavigator() {
       <Stack.Screen name="BookOrder" component={BookOrderScreen} options={{ headerShown: false }} />
       <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen name="NewOrder" component={NewOrderScreen} />
+      <Stack.Screen name="OrderDetails" component={OrderDetailsScreen}/>
       
       {/* Main App Screens */}
       {Platform.OS !== 'web' ? (

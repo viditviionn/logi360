@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({
   shadow = false,
 }) => {
   const combinedStyles = [
-    'w-full h-[60px] flex-row items-center px-4',
+    'w-[70%] h-[60px] flex-row items-center px-4',
     bgColor,
     bottomBorder ? 'border-b border-gray-200' : '',
     shadow ? 'shadow-[0_1px_4px_rgba(0,0,0,0.1)]' : '',

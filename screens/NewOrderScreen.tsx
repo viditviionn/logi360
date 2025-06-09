@@ -11,26 +11,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { AntDesign, Feather, FontAwesome6, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import DropDownPicker from 'react-native-dropdown-picker';
+import * as DocumentPicker from 'expo-document-picker';
+import Header from './Header';
+import ProgressStepper from 'components/ProgressStepper';
 
 type RootStackParamList = {
-
+  OrderDetails: undefined; 
 };
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
 export default function NewOrderScreen({ navigation,}: Props) {
-  const [formData, setFormData] = useState({
-    consignerName: '',
-    consignerGstin: '',
-    consignerAddress: '',
-    consignerMobile: '',
-    consigneeName: '',
-    consigneeGstin: '',
-    consigneeAddress: '',
-    consigneeMobile: '',
-    ewayBillNo: '',
-    ewayBillExpiry: '',
-  });
 
   const [open, setOpen] = useState(false);
   const [deliveryType, setDeliveryType] = useState('godown');
@@ -38,75 +29,43 @@ export default function NewOrderScreen({ navigation,}: Props) {
     { label: 'Godown', value: 'godown' },
     { label: 'Home', value: 'home' },
     { label: 'Office', value: 'office' },
+    
   ]);
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
+  const [uploadedDocs, setUploadedDocs] = useState<string[]>([]);
+  const pickDocument = async () => {
+    try {
+      const result = await DocumentPicker.getDocumentAsync({ type: "*/*" });
+  
+ 
+      if (!result.canceled) {
+        
+        const fileName = result.assets?.[0]?.name;
+        if (fileName) {
+          setUploadedDocs(prev => [...prev, fileName]);
+        }
+      }
+    } catch (err) {
+      console.error('Document pick error:', err);
+    }
   };
+
+  const handleContinue =  ()=>{
+    navigation.navigate("OrderDetails")
+  }
 
   return (
     <SafeAreaView className="flex-1  bg-[#F5F5F5]">
       {/* Header */}
-      <View
-        className="flex-row items-center justify-between bg-white px-1 pt-10"
-       
-      >
-        <View className="flex-row items-center">
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            className="pr-2"
-          >
-            <Ionicons name="chevron-back" size={24} color="#000" />
-          </TouchableOpacity>
-          <Text className="text-[18px] font-inter-semibold text-black">
-            Book new order
-          </Text>
-        </View>
-        <TouchableOpacity>
-          <Text className="text-[16px] text-[#C30606] font-inter-medium pr-2">Cancel Order</Text>
-        </TouchableOpacity>
-
-
-        
-      </View>
-
-      {/* Progress Indicators */}
-     
-      <View className="flex-row justify-between items-center px-4 py-4 bg-white shadow-[0_4px_10px_rgba(0,0,3,0.1)]">
-        <View className="items-center ">
-          <View className="  justify-center mb-1">
-          <View className="w-10 h-10 rounded-full border border-black items-center justify-center">
-          <Feather name="map-pin" size={24} color="black" />
-          </View>
-          </View>
-          <Text className="font-inter-semibold text-[13px] text-[black]">Address</Text>
-        </View>
-        
-        <View className="flex-1 h-[1px] border-[1px]  mb-6 border-dashed border-[#BEC4C8]" />
-        
-        <View className="items-center ml-[-20px] mr-[-20px]">
-          <View className="items-center justify-center mb-1">
-          <View className="w-10 h-10 rounded-full border border-[#D1D5DB] items-center justify-center">
-            <Feather name="box" size={24} color="#D1D5DB" />
-            </View>
-          </View>
-          <Text className="font-inter-semibold text-[13px] text-[#A0A1A1] w-[90px] text-center whitespace-nowrap">Item details</Text>
-        </View>
-        
-        <View className="flex-1 h-[1px] border-[1px] mb-6 border-dashed border-[#E0E0E0]" />
-        
-        <View className="items-center ">
-        <View className="items-center justify-center mb-1">
-  <View className="w-10 h-10 rounded-full border border-[#D1D5DB] items-center justify-center">
-    <MaterialCommunityIcons name="currency-inr" size={24} color="#D1D5DB" />
-  </View>
+      <View className="flex-row  justify-between bg-white pt-3 ">
+      <Header title="Book new order" navigation={navigation} />
+      <TouchableOpacity>
+    <Text className="text-[16px] text-[#C30606] font-inter-medium pt-6 pr-3">Cancel Order</Text>
+  </TouchableOpacity>
 </View>
-          <Text className="font-inter-semibold text-[13px] text-[#A0A1A1]">Charges</Text>
-        </View>
-      </View>
+      {/* Progress Indicators */}
+      <ProgressStepper activeStep={1} />
+
+
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         {/* Delivery Type */}
         <View className="pt-2 pb-4 px-4 bg-[f7fafd]">
@@ -241,21 +200,50 @@ export default function NewOrderScreen({ navigation,}: Props) {
 
         {/* Additional Documents */}
         <View className="px-4 mb-4">
-          <Text className="text-[#666666] text-[14px] mb-1 font-inter">Additional documents</Text>
-          <TouchableOpacity className="flex-row justify-between items-center px-3 py-2.5 bg-white border border-[#E0E0E0] rounded-lg">
-            <Text className="text-[15px] font-inter">Upload additional documents</Text>
-            <View className="flex-row items-center">
-              <Text className="text-[#007AFF] text-[15px] font-medium mr-1">Upload</Text>
-              <MaterialIcons name="vertical-align-top" size={20} color="#007AFF" />
+  <Text className="text-[#666666] text-[14px] mb-1 font-inter">Additional documents</Text>
 
-            </View>
-          </TouchableOpacity>
-        </View>
+  {uploadedDocs.length === 0 && (
+    <TouchableOpacity
+      onPress={pickDocument}
+      className="flex-row justify-between items-center px-3 py-2.5 bg-white border border-[#E0E0E0] rounded-lg"
+    >
+      <Text className="text-[15px] font-inter">Upload additional documents</Text>
+      <View className="flex-row items-center">
+        <Text className="text-[#007AFF] text-[15px] font-medium mr-1">Upload</Text>
+        <MaterialIcons name="vertical-align-top" size={20} color="#007AFF" />
+      </View>
+    </TouchableOpacity>
+  )}
+
+  {/* Show uploaded docs */}
+  {uploadedDocs.map((doc, index) => (
+  <View
+    key={index}
+    className="flex-row items-center px-3 py-2.5 bg-white border border-[#E0E0E0] rounded-lg mt-2"
+  >
+    <MaterialIcons name="insert-drive-file" size={20} color="#007AFF" className="mr-2" />
+    <Text
+      className="text-[15px] font-inter flex-1"
+      numberOfLines={1}
+      ellipsizeMode="middle"
+    >
+      {doc}
+    </Text>
+  </View>
+))}
+
+  {/* Show "Upload another document" link */}
+  {uploadedDocs.length > 0 && (
+    <TouchableOpacity onPress={pickDocument} className="mt-2">
+      <Text className="text-[#007AFF] text-[15px] text-center font-inter-medium">+ Upload another document</Text>
+    </TouchableOpacity>
+  )}
+</View>
       </ScrollView>
 
       {/* Continue Button */}
       <View className="px-4 py-2 mb-15 bg-white flex justify-center items-center">
-  <TouchableOpacity className="bg-[#007AFF] py-3 mt-3 w-full max-w-[412px] rounded-lg items-center">
+  <TouchableOpacity onPress={handleContinue} className="bg-[#007AFF] py-3 mt-3 w-full max-w-[412px] rounded-lg items-center">
     <Text className="text-white text-[15px] font-inter-medium">Continue</Text>
   </TouchableOpacity>
 </View>
