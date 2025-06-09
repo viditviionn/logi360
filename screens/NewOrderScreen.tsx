@@ -6,6 +6,7 @@ import {
   ScrollView,
   TextInput,
   Image,
+  Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AntDesign, Feather, FontAwesome6, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
@@ -14,6 +15,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import Header from './Header';
 import ProgressStepper from 'components/ProgressStepper';
+import WebHeaderNavigator from '../navigation/HeaderTabNavigator';
 
 type RootStackParamList = {
   OrderDetails: undefined; 
@@ -93,86 +95,86 @@ export default function NewOrderScreen({ navigation,}: Props) {
           />
         </View>
 
-        <View className="relative px-4">
-          {/* Dotted Line with Indicators */}
-          <View className="absolute left-6 items-center" style={{ top: 20, bottom: 185 }}>
-            <View className="w-[10px] h-[10px] mb-1 rounded-full bg-green-500" />
-            <View className="flex-1 border-l border-dashed border-[#7C7C7C]" />
-            <FontAwesome6 name="location-pin" size={15} color="red" />
-          </View>
+          <View className="relative px-4">
+            {/* Dotted Line with Indicators */}
+            <View className="absolute left-6 items-center" style={{ top: 20, bottom: 185 }}>
+              <View className="w-[10px] h-[10px] mb-1 rounded-full bg-green-500" />
+              <View className="flex-1 border-l border-dashed border-[#7C7C7C]" />
+              <FontAwesome6 name="location-pin" size={15} color="red" />
+            </View>
 
-          {/* Consigner Details Card */}
-          <View className="ml-8 mb-7 bg-white rounded-[20px] p-4"
-            style={{
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 1 },
-              shadowOpacity: 0.08,
-              shadowRadius: 8,
-              elevation: 2,
-            }}>
-            <View>
-              <View className="flex-row justify-between">
-                <View className="flex-1 mr-4">
-                  <Text className="text-gray-500 text-[12px] font-inter">Consignor name:</Text>
-                  <Text className="text-black text-[14px] font-inter-medium mt-1">Tanmay Kathane</Text>
-                </View>
-                <View className="flex-1">
-                  <Text className="text-gray-500 text-[12px] font-inter">Consignor GSTIN:</Text>
-                  <View className="flex-row items-center mt-1">
-                    <Text className="text-black text-[14px] font-inter-medium mr-1">22AAA0001A1Z8</Text>
-                    <Image source={require('../assets/icons/check.png')} className="w-5 h-5" />
+            {/* Consigner Details Card */}
+            <View className="ml-8 mb-7 bg-white rounded-[20px] p-4"
+              style={{
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 1 },
+                shadowOpacity: 0.08,
+                shadowRadius: 8,
+                elevation: 2,
+              }}>
+              <View>
+                <View className="flex-row justify-between">
+                  <View className="flex-1 mr-4">
+                    <Text className="text-gray-500 text-[12px] font-inter">Consignor name:</Text>
+                    <Text className="text-black text-[14px] font-inter-medium mt-1">Tanmay Kathane</Text>
+                  </View>
+                  <View className="flex-1">
+                    <Text className="text-gray-500 text-[12px] font-inter">Consignor GSTIN:</Text>
+                    <View className="flex-row items-center mt-1">
+                      <Text className="text-black text-[14px] font-inter-medium mr-1">22AAA0001A1Z8</Text>
+                      <Image source={require('../assets/icons/check.png')} className="w-5 h-5" />
+                    </View>
                   </View>
                 </View>
+
+                <View className="mt-4">
+                  <Text className="text-gray-500 text-[12px] font-inter">From Address:</Text>
+                  <Text className="text-black text-[14px] font-inter-medium mt-1">A-1302, Gokuldham Society, Sector 35D, Kharghar Navi Mumbai - 410210</Text>
+                </View>
+
+                <View className="mt-4">
+                  <Text className="text-gray-500 text-[12px] font-inter">Consignor mobile number:</Text>
+                  <Text className="text-black text-[14px] font-inter-medium mt-1">+91 9829754822</Text>
+                </View>
               </View>
-              
-              <View className="mt-4">
-                <Text className="text-gray-500 text-[12px] font-inter">From Address:</Text>
-                <Text className="text-black text-[14px] font-inter-medium mt-1">A-1302, Gokuldham Society, Sector 35D, Kharghar Navi Mumbai - 410210</Text>
-              </View>
-              
-              <View className="mt-4">
-                <Text className="text-gray-500 text-[12px] font-inter">Consignor mobile number:</Text>
-                <Text className="text-black text-[14px] font-inter-medium mt-1">+91 9829754822</Text>
+            </View>
+
+            {/* Consignee Details Card */}
+            <View className="ml-8 bg-white mb-4 rounded-[20px] p-4"
+              style={{
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 1 },
+                shadowOpacity: 0.08,
+                shadowRadius: 8,
+                elevation: 2,
+              }}>
+              <View>
+                <View className="flex-row justify-between">
+                  <View className="flex-1 mr-4">
+                    <Text className="text-gray-500 text-[12px] font-inter">Consignee name:</Text>
+                    <Text className="text-black text-[14px] font-inter-medium mt-1">John Doe</Text>
+                  </View>
+                  <View className="flex-1">
+                    <Text className="text-gray-500 text-[12px]">Consignor GSTIN:</Text>
+                    <View className="flex-row items-center mt-1">
+                      <Text className="text-black text-[14px] font-inter-medium mr-1">22AAA0001A1Z8</Text>
+                      <Image source={require('../assets/icons/check.png')} className="w-5 h-5" />
+                    </View>
+                  </View>
+                </View>
+
+                <View className="mt-4">
+                  <Text className="text-gray-500 text-[12px] font-inter">To Address:</Text>
+                  <Text className="text-black text-[14px] font-inter-medium mt-1">A-1302, Gokuldham Society, Sector 35D, Kharghar Navi Mumbai - 410210</Text>
+                </View>
+
+                <View className="mt-4">
+                  <Text className="text-gray-500 text-[12px] font-inter">Consignee mobile number:</Text>
+                  <Text className="text-black text-[14px] font-inter-medium mt-1">+91 7483110798</Text>
+                </View>
               </View>
             </View>
           </View>
-
-          {/* Consignee Details Card */}
-          <View className="ml-8 bg-white mb-4 rounded-[20px] p-4"
-            style={{
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 1 },
-              shadowOpacity: 0.08,
-              shadowRadius: 8,
-              elevation: 2,
-            }}>
-            <View>
-              <View className="flex-row justify-between">
-                <View className="flex-1 mr-4">
-                  <Text className="text-gray-500 text-[12px] font-inter">Consignee name:</Text>
-                  <Text className="text-black text-[14px] font-inter-medium mt-1">John Doe</Text>
-                </View>
-                <View className="flex-1">
-                  <Text className="text-gray-500 text-[12px]">Consignor GSTIN:</Text>
-                  <View className="flex-row items-center mt-1">
-                    <Text className="text-black text-[14px] font-inter-medium mr-1">22AAA0001A1Z8</Text>
-                   <Image source={require('../assets/icons/check.png')} className="w-5 h-5" />
-                  </View>
-                </View>
-              </View>
-              
-              <View className="mt-4">
-                <Text className="text-gray-500 text-[12px] font-inter">To Address:</Text>
-                <Text className="text-black text-[14px] font-inter-medium mt-1">A-1302, Gokuldham Society, Sector 35D, Kharghar Navi Mumbai - 410210</Text>
-              </View>
-              
-              <View className="mt-4">
-                <Text className="text-gray-500 text-[12px] font-inter">Consignee mobile number:</Text>
-                <Text className="text-black text-[14px] font-inter-medium mt-1">+91 7483110798</Text>
-              </View>
-            </View>
-          </View>
-        </View>
 
         {/* E-way Bill Details */}
         <View className="px-4 mt-5 mb-4">
@@ -251,4 +253,3 @@ export default function NewOrderScreen({ navigation,}: Props) {
     </SafeAreaView>
   );
 }
-

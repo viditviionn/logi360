@@ -1,5 +1,7 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image, StatusBar, Platform, FlatList } from 'react-native';
+import React from 'react';
+import { View, Text, SafeAreaView, TouchableOpacity, Image, StatusBar, Platform ,FlatList} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import WebHeaderNavigator from '../navigation/HeaderTabNavigator';
 import { useState } from 'react';
 
 
@@ -23,43 +25,47 @@ const locations = [
 ];
 
 
-
-export default function HomeScreen({ navigation, setActiveTab }: any) {
+export default function HomeScreen({ navigation }: any) {
   const [selectedLocation, setSelectedLocation] = useState(locations[0]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  return (
-    <>
-      {
-        Platform.OS === 'web' ? (
-          <>
-            <SafeAreaView className="flex-1 gap-6">
-              <StatusBar backgroundColor="#2F2F2F" />
-              <View className="flex-1 flex-row gap-6 px-4 mt-6">
 
-                <TouchableOpacity
-                  className="bg-white rounded-2xl w-[20%] h-[200px] z-10"
-                  onPress={() => setActiveTab('bookOrder')}
-                  style={{
-                    shadowColor: '#000',
-                    shadowOffset: { width: 0, height: 6 },
-                    shadowOpacity: 0.15,
-                    shadowRadius: 2.5,
-                    elevation: 4,
-                  }}
-                >
-                  <View className="flex-row justify-between mt-2 px-3 ">
-                    <Text className="text-[14px] font-semibold text-[#505152]">Book Order</Text>
-                    <Ionicons name="chevron-forward" size={18} color="#1E1E1E" />
-                  </View>
-                  <View className="items-end mt-auto pr-3 pb-3">
-                    <Image
-                      source={require('../assets/images/Book-Orders.png')}
-                      className="w-[70%] h-[55px]"
-                      resizeMode="contain"
-                    />
-                  </View>
-                </TouchableOpacity>
+
+  return (
+      <>
+        {
+          Platform.OS === 'web' ? (
+            <>
+            <SafeAreaView className="flex-1 gap-6">
+          <StatusBar backgroundColor="#2F2F2F" />
+          <WebHeaderNavigator navigation={navigation}/>
+          <View className="flex-1 flex-row gap-6 px-4 mt-1">
+
+            <TouchableOpacity
+              className="bg-white rounded-2xl w-[20%] h-[200px]"
+              onPress={() => {
+                navigation.navigate('BookOrder');
+              }}
+              style={{
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 6 },
+                shadowOpacity: 0.15,
+                shadowRadius: 2.5,
+                elevation: 4,
+              }}
+            >
+              <View className="flex-row justify-between mt-2 px-3">
+                <Text className="text-[14px] font-semibold text-[#505152]">Book Order</Text>
+                <Ionicons name="chevron-forward" size={18} color="#1E1E1E" />
+              </View>
+              <View className="items-end mt-auto pr-3 pb-3">
+                <Image
+                  source={require('../assets/images/Book-Orders.png')}
+                  className="w-[70%] h-[55px]"
+                  resizeMode="contain"
+                />
+              </View>
+            </TouchableOpacity>
 
             <TouchableOpacity
               className="bg-white rounded-2xl w-[20%] h-[200px]"

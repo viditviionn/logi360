@@ -1,8 +1,8 @@
 import { View, Text, Platform, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
-import Button from 'components/Button';
-import RadioButton from 'components/RadioButton';
+import Button from '../components/Button';
+import RadioButton from '../components/RadioButton';
 
 export default function LanguageSelectionScreen({ navigation }: any) {
   const [selectedLanguage, setSelectedLanguage] = useState('English');
