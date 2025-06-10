@@ -7,6 +7,7 @@ import {
   TextInput,
   Image,
   Platform,
+  Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AntDesign, Feather, FontAwesome6, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
@@ -401,13 +402,13 @@ export default function NewOrderScreen({ navigation, }: Props) {
           />
         </View>
 
-        <View className="relative px-4">
-          {/* Dotted Line with Indicators */}
-          <View className="absolute left-6 items-center" style={{ top: 20, bottom: 185 }}>
-            <View className="w-[10px] h-[10px] mb-1 rounded-full bg-green-500" />
-            <View className="flex-1 border-l border-dashed border-[#7C7C7C]" />
-            <FontAwesome6 name="location-pin" size={15} color="red" />
-          </View>
+          <View className="relative px-4">
+            {/* Dotted Line with Indicators */}
+            <View className="absolute left-6 items-center" style={{ top: 20, bottom: 185 }}>
+              <View className="w-[10px] h-[10px] mb-1 rounded-full bg-green-500" />
+              <View className="flex-1 border-l border-dashed border-[#7C7C7C]" />
+              <FontAwesome6 name="location-pin" size={15} color="red" />
+            </View>
 
           {/* Consigner Details Card */}
           <View className="ml-8 mb-7 bg-white rounded-[20px] p-4"
