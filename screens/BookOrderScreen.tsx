@@ -147,14 +147,24 @@ export default function BookOrderScreen({ navigation }: any) {
 
             <View className="flex-row justify-center w-full px-4 pb-6 gap-x-4">
               {!previewUrl ? (
+                <View className='flex-row justify-center w-full px-4 pb-6 gap-x-4'>
                 <TouchableOpacity
                   onPress={handleManualUploadClick}
                   className="flex-1 border border-[#93E23E] rounded-lg py-3 items-center bg-white max-w-[300px]"
                 >
                   <Text className="text-[#262727] font-inter-medium">
-                    Enter Manually
+                    Open Folder
                   </Text>
                 </TouchableOpacity>
+                {/* <TouchableOpacity
+                  onPress={()=>navigation.navigate('ManualyNewOrder')}
+                  className="flex-1 border border-[#93E23E] rounded-lg py-3 items-center bg-white max-w-[300px]"
+                >
+                  <Text className="text-[#262727] font-inter-medium">
+                    Enter Manually
+                  </Text>
+                </TouchableOpacity> */}
+                </View>
 
               ) : (
                 <>
