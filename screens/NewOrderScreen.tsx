@@ -7,7 +7,6 @@ import {
   TextInput,
   Image,
   Platform,
-  Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AntDesign, Feather, FontAwesome6, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
@@ -60,7 +59,7 @@ export default function NewOrderScreen({ navigation, }: Props) {
     <SafeAreaView className="flex-1 bg-[#F5F5F5]">
       <WebHeaderNavigator navigation={navigation} />
       <View className="mx-auto w-full h-[calc(100vh-60px)] overflow-hidden flex flex-col">
-        <View className='rounded-lg shadow-sm bg-white'>
+        <View className=' shadow-lg shadow-[#0C0C0D1A] bg-white'>
           {/* Header */}
           <View className="flex-row items-center justify-between px-4 py-2">
             <View className="flex-row items-center">

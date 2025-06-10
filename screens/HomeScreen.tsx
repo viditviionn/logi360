@@ -1,8 +1,31 @@
-import React from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity, Image, StatusBar, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, SafeAreaView, TouchableOpacity, Image, StatusBar, Platform, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import WebHeaderNavigator from '../navigation/HeaderTabNavigator';
+
+const locations = [
+  {
+    name: 'APMC Market',
+    address: 'Administrative building, Sec 18, Vashi Navi Mumbai',
+  },
+  {
+    name: 'Vashi Market',
+    address: 'Vashi Main Office, Sec 17',
+  },
+  {
+    name: 'Turbhe Market',
+    address: 'Turbhe Main Office',
+  },
+  {
+    name: 'Koparkhairne Market',
+    address: 'Koparkhairne Main Office',
+  }
+];
+
 export default function HomeScreen({ navigation }: any) {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState(locations[0]);
+
   return (
     <>
       {

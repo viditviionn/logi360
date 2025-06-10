@@ -1,80 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, Modal, FlatList } from 'react-native';
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, Modal, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 type MarketLocations = {
   [key: string]: string[];
 };
 
-type MarketLocations = {
-  [key: string]: string[];
-};
-
-export default function WebHeaderNavigator({ navigation }: any) {
-  const [activeTab, setActiveTab] = useState("home");
-  const [showMarketDropdown, setShowMarketDropdown] = useState(false);
-  const [selectedMarket, setSelectedMarket] = useState("APMC Market");
-  const [selectedLocation, setSelectedLocation] = useState("Administrative building, Sec 18, Vashi Navi M...");
-
-  const marketLocations: MarketLocations = {
-    "APMC Market": [
-      "Administrative building, Sec 18, Vashi Navi M...",
-    ],
-    "Vashi Market": [
-      "Vashi Main Office, Sec 17",
-    ],
-    "Turbhe Market": [
-      "Turbhe Main Office",
-    ],
-    "Koparkhairne Market": [
-      "Koparkhairne Main Office",
-    ]
-  };
-
-  const markets = Object.keys(marketLocations).filter(market => market !== selectedMarket);
-
-  const handleMarketSelect = (market: string, location: string) => {
-    setSelectedMarket(market);
-    setSelectedLocation(location);
-    setShowMarketDropdown(false);
-  };
-
-  const handleOrders = () => {
-    navigation.navigate('HomeScreen');
-    setActiveTab('orders');
-  }
-  const handleProfile = () => {
-    navigation.navigate('HomeScreen');
-    setActiveTab('profile');
-  }
-
-  const renderDropdownItem = (market: string) => (
-    <View>
-      {marketLocations[market]
-        .filter(location => !(market === selectedMarket && location === selectedLocation))
-        .map((location, index) => (
-        <TouchableOpacity
-          key={`${market}-${index}`}
-          style={{
-            padding: 15,
-            borderBottomWidth: 1,
-            borderBottomColor: '#2F2F2F',
-          }}
-          onPress={() => handleMarketSelect(market, location)}
-        >
-          <Text style={{ color: 'white', fontSize: 16, fontWeight: '500' }}>
-            {market}
-          </Text>
-          <Text style={{ color: '#BEC4C8', fontSize: 12, marginTop: 4 }}>
-            {location}
-          </Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-  );
-export default function WebHeaderNavigator({ navigation }: any) {
+export default function WebHeaderNavigator({ navigation }: any): JSX.Element {
   const [activeTab, setActiveTab] = useState("home");
   const [showMarketDropdown, setShowMarketDropdown] = useState(false);
   const [selectedMarket, setSelectedMarket] = useState("APMC Market");
@@ -163,41 +95,6 @@ export default function WebHeaderNavigator({ navigation }: any) {
             </Text>
           </View>
         </View>
-
-        {/* Market Dropdown Modal */}
-        <Modal
-          visible={showMarketDropdown}
-          transparent={true}
-          animationType="fade"
-          onRequestClose={() => setShowMarketDropdown(false)}
-        >
-          <TouchableOpacity
-            style={{ flex: 1, backgroundColor: 'transparent' }}
-            activeOpacity={1}
-            onPress={() => setShowMarketDropdown(false)}
-          >
-            <View style={{ 
-              position: 'absolute',
-              top: 70,
-              left: 12,
-              backgroundColor: 'black',
-              borderRadius: 8,
-              width: 300,
-              maxHeight: 400,
-              elevation: 5,
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 2 },
-              shadowRadius: 3.84,
-            }}>
-              <FlatList
-                data={markets}
-                renderItem={({ item }) => renderDropdownItem(item)}
-                keyExtractor={(item) => item}
-                showsVerticalScrollIndicator={false}
-              />
-            </View>
-          </TouchableOpacity>
-        </Modal>
 
         {/* Market Dropdown Modal */}
         <Modal
