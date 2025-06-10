@@ -227,7 +227,7 @@ export default function InvoiceScanner({ navigation }: any) {
         </View>
 
         {/* Capture Button */}
-        <View className="absolute bottom-8 left-0 right-0 items-center">
+        <View className="flex-row justify-center absolute bottom-8 left-0 right-0 items-center">
           <TouchableOpacity
             className="w-[70px] h-[70px] rounded-full bg-white items-center justify-center"
             onPress={takePhoto}
@@ -238,8 +238,18 @@ export default function InvoiceScanner({ navigation }: any) {
                 (isCapturing || isLoading) ? 'opacity-50' : ''
               }`}
             />
+
+
           </TouchableOpacity>
+
+          <TouchableOpacity className='pl-6' onPress={() => navigation.navigate('ManualyNewOrder')}>
+            <Text className='text-white'> Manual Screen</Text>
+          </TouchableOpacity>
+        
         </View>
+
+      
+         
 
         {/* Retake */}
         {selectedImage && !isLoading && (

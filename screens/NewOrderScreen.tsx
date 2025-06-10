@@ -19,6 +19,7 @@ import WebHeaderNavigator from '../navigation/HeaderTabNavigator';
 
 type RootStackParamList = {
   OrderDetails: undefined; 
+  BookOrder: undefined; 
 };
 
 type Props = NativeStackScreenProps<RootStackParamList>;
@@ -27,6 +28,7 @@ export default function NewOrderScreen({ navigation,}: Props) {
 
   const [open, setOpen] = useState(false);
   const [deliveryType, setDeliveryType] = useState('godown');
+  const [showCancelModal, setShowCancelModal] = useState(false);
   const [items, setItems] = useState([
     { label: 'Godown', value: 'godown' },
     { label: 'Home', value: 'home' },
@@ -60,7 +62,7 @@ export default function NewOrderScreen({ navigation,}: Props) {
       {/* Header */}
       <View className="flex-row  justify-between bg-white pt-3 ">
       <Header title="Book new order" navigation={navigation} />
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=> setShowCancelModal(true)}>
     <Text className="text-[16px] text-[#C30606] font-inter-medium pt-6 pr-3">Cancel Order</Text>
   </TouchableOpacity>
 </View>
@@ -249,6 +251,39 @@ export default function NewOrderScreen({ navigation,}: Props) {
     <Text className="text-white text-[15px] font-inter-medium">Continue</Text>
   </TouchableOpacity>
 </View>
+
+
+
+
+{/* Cancel Modal */}
+{showCancelModal && (
+        <View className="absolute inset-0 bg-black/80  justify-center items-center z-50">
+          <View className="w-[85%] bg-white rounded-2xl p-6 shadow-lg">
+            <Text className="text-[16px] text-[#505152] font-inter text-center self-center mb-6 w-40">
+              Do you wish to cancel this order?
+            </Text>
+
+            <View className="flex-row justify-between">
+              <TouchableOpacity
+                onPress={() => setShowCancelModal(false)}
+                className="border border-[#93E23E] px-4 py-2 rounded-md flex-1 mr-2"
+              >
+                <Text className="text-black text-center font-inter-semibold">Save in drafts</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => {
+                  setShowCancelModal(false);
+                  navigation.navigate("BookOrder");
+                }}
+                className="bg-[#93E23E] px-4 py-2 rounded-md flex-1 ml-2"
+              >
+                <Text className="text-black text-center font-inter-semibold">Yes, cancel</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      )}
 
     </SafeAreaView>
   );

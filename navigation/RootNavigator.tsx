@@ -10,6 +10,7 @@ import HeaderTabNavigator from './HeaderTabNavigator';
 import HomeScreen from '../screens/HomeScreen';
 import NewOrderScreen from '../screens/NewOrderScreen';
 import OrderDetailsScreen from 'screens/OrderDetailsScreen';
+import ManualyNewOrderScreen from 'screens/ManualyNewOrderScreen';
 
 let InvoiceScanner: any;
 if (Platform.OS !== 'web') {
@@ -29,6 +30,8 @@ export default function RootNavigator() {
       <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen name="NewOrder" component={NewOrderScreen} />
       <Stack.Screen name="OrderDetails" component={OrderDetailsScreen}/>
+      <Stack.Screen name="ManualyNewOrder" component={ManualyNewOrderScreen}/>
+      
       
       {/* Main App Screens */}
       {Platform.OS !== 'web' ? (
