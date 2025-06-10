@@ -9,22 +9,22 @@ const locations = [
     address: 'Administrative building, Sec 18, Vashi Navi Mumbai',
   },
   {
-    name: 'Vashi Market Yard',
-    address: 'Plot 5, Sector 19, Vashi, Navi Mumbai',
+    name: 'Vashi Market',
+    address: 'Vashi Main Office, Sec 17',
   },
   {
-    name: 'Turbhe Naka',
-    address: 'Sector 21, Turbhe MIDC, Navi Mumbai',
+    name: 'Turbhe Market',
+    address: 'Turbhe Main Office',
   },
   {
-    name: 'Belapur Station',
-    address: 'CBD Belapur, Navi Mumbai',
-  },
+    name: 'Koparkhairne Market',
+    address: 'Koparkhairne Main Office',
+  }
 ];
 
 export default function HomeScreen({ navigation }: any) {
-  const [selectedLocation, setSelectedLocation] = useState(locations[0]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState(locations[0]);
 
   return (
     <>
