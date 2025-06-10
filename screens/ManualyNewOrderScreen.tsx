@@ -29,7 +29,8 @@ export default function ManualyNewOrderScreen({ navigation, }: Props) {
 
     const [uploadedDocs, setUploadedDocs] = useState<string[]>([]);
     const [showCancelModal, setShowCancelModal] = useState(false);
-
+    const [consignorName, setConsignorName] = useState("");
+    const [consignorneeName,setConsignorneeName]=useState("")
     useEffect(() => {
         setShowCancelModal(false)
     }, []);
@@ -97,10 +98,12 @@ export default function ManualyNewOrderScreen({ navigation, }: Props) {
                         <Text className="text-[14px] text-[#666] font-inter mb-1">Consignor Name</Text>
                         <TextInput
                             className="bg-white px-3 py-4 border border-[#E0E0E0] rounded-lg font-inter "
-                            value={""}
+                            value={consignorName}  
                             style={{ fontSize: 14 }}
                             placeholder="Enter consignor's name"
                             placeholderTextColor="#E57C00"
+                            editable={true}
+                            onChange={()=>{setConsignorName(consignorName)}}
                         />
                     </View>
 
